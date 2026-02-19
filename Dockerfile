@@ -4,8 +4,8 @@ RUN micromamba install -y -n base -c conda-forge git && \
     micromamba clean --all --yes
 
 # Install mamba from conda-forge (now without defaults)
-RUN mamba install -y mamba -n base -c conda-forge && \
-    mamba clean -afy
+RUN micromamba install -y mamba -n base -c conda-forge && \
+    micromamba clean -afy
 
 # Clone mbarq
 WORKDIR /opt
@@ -16,7 +16,7 @@ WORKDIR /opt/mbarq
 SHELL ["/bin/bash", "-c"]
 
 # Create env and install mbarq
-RUN mamba env create -f mbarq_environment.yaml && \
+RUN micromamba env create -f mbarq_environment.yaml && \
     source activate mbarq && \
     pip install -e . && \
     conda clean -afy

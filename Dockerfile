@@ -1,19 +1,7 @@
 FROM mambaorg/micromamba:latest
 
-# Basic tools
-RUN apt-get update && apt-get install -y \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-ENV CONDA_DIR=/opt/conda
-ENV PATH=${CONDA_DIR}/bin:${PATH}
-
-# Also clear any user-level channels and re-add what we want
-RUN conda config --remove channels defaults && \
-    conda config --add channels conda-forge && \
-    conda config --add channels bioconda && \
-    conda config --set channel_priority strict && \
-    conda config --show channels
+RUN micromamba install -y -n base -c conda-forge git && \
+    micromamba clean --all --yes
 
 # Install mamba from conda-forge (now without defaults)
 RUN conda install -y mamba -n base -c conda-forge && \

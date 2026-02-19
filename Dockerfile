@@ -4,8 +4,8 @@ RUN micromamba install -y -n base -c conda-forge git && \
     micromamba clean --all --yes
 
 # Install mamba from conda-forge (now without defaults)
-RUN conda install -y mamba -n base -c conda-forge && \
-    conda clean -afy
+RUN mamba install -y mamba -n base -c conda-forge && \
+    mamba clean -afy
 
 # Clone mbarq
 WORKDIR /opt

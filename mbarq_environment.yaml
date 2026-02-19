@@ -2,7 +2,6 @@ name: mbarq
 channels:
   - bioconda
   - conda-forge
-  - defaults
 dependencies:
   - mageck
   - python>=3.8

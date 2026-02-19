@@ -15,7 +15,7 @@ RUN mkdir -p /etc/conda && \
     printf "channels:\n  - conda-forge\n  - bioconda\nchannel_priority: strict\n" > /etc/conda/.condarc
 
 # Also clear any user-level channels and re-add what we want
-RUN conda config --remove-key channels || true && \
+RUN conda config --remove channels defaults && \
     conda config --add channels conda-forge && \
     conda config --add channels bioconda && \
     conda config --set channel_priority strict && \

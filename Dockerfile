@@ -8,11 +8,11 @@ RUN micromamba install -y mamba -n base -c conda-forge && \
     micromamba clean -afy
 
 # Clone mbarq
-WORKDIR /opt
+WORKDIR /home/mambauser
 ENV MAMBA_ROOT_PREFIX=/opt/conda
 ENV PATH=${MAMBA_ROOT_PREFIX}/bin:${PATH}
 RUN git clone https://github.com/MicrobiologyETHZ/mbarq.git
-WORKDIR /opt/mbarq
+WORKDIR /home/mambauser/mbarq
 
 # Use bash so 'conda' works as expected in RUN steps
 SHELL ["/bin/bash", "-c"]

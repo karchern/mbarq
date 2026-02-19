@@ -23,9 +23,10 @@ SHELL ["/bin/bash", "-c"]
 #     pip install -e . && \
 #     conda clean -afy
 RUN micromamba env create -f mbarq_environment.yaml && \
-    micromamba run -n mbarq pip install -e . && \
-    micromamba run -n mbarq pip install "setuptools<=70" \
+    micromamba run -n mbarq pip install -e . && \ 
     micromamba clean --all --yes
+
+RUN micromamba run -n mbarq pip install 'setuptools<=70'
 
 # Make the mbarq env default on PATH
 ENV PATH=/opt/conda/envs/mbarq/bin:${PATH}

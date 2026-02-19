@@ -30,9 +30,9 @@ SHELL ["/bin/bash", "-c"]
 # Create env, install mbarq
 RUN conda env create -f mbarq_environment.yaml
 
-RUN source activate mbarq && \
-    pip install -e . && \
-    conda clean -afy
+# RUN source activate mbarq && \
+#     pip install -e . && \
+#     conda clean -afy
 
 # Make mbarq env default on PATH
 ENV PATH=/opt/conda/envs/mbarq/bin:${PATH}

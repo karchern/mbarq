@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:latest
+FROM mambaorg/micromamba:latest
 
 # Basic tools
 RUN apt-get update && apt-get install -y \
@@ -7,12 +7,6 @@ RUN apt-get update && apt-get install -y \
 
 ENV CONDA_DIR=/opt/conda
 ENV PATH=${CONDA_DIR}/bin:${PATH}
-
-# Hard override any global conda configuration:
-# Only conda-forge and bioconda; no defaults.
-# This writes a system-level .condarc that will be picked up by all conda calls.
-RUN mkdir -p /etc/conda && \
-    printf "channels:\n  - conda-forge\n  - bioconda\nchannel_priority: strict\n" > /etc/conda/.condarc
 
 # Also clear any user-level channels and re-add what we want
 RUN conda config --remove channels defaults && \

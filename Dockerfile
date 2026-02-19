@@ -10,14 +10,14 @@ ENV CONDA_DIR=/opt/conda
 ENV PATH=${CONDA_DIR}/bin:${PATH}
 
 # Configure channels: drop defaults, add conda-forge and bioconda
-RUN conda config --remove channels defaults || true && \
+RUN conda config --remove channels defaults && \
     conda config --add channels conda-forge && \
     conda config --add channels bioconda && \
     conda config --set channel_priority strict
 
 # Install mamba in base env
-RUN conda install -y mamba -n base -c conda-forge && \
-    conda clean -afy
+# RUN conda install -y mamba -n base -c conda-forge && \
+#     conda clean -afy
 
 # Clone mbarq
 WORKDIR /opt
@@ -28,8 +28,9 @@ WORKDIR /opt/mbarq
 SHELL ["/bin/bash", "-c"]
 
 # Create env, install mbarq
-RUN mamba env create -f mbarq_environment.yaml && \
-    source activate mbarq && \
+RUN conda env create -f mbarq_environment.yaml
+
+RUN source activate mbarq && \
     pip install -e . && \
     conda clean -afy
 

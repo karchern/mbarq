@@ -16,8 +16,8 @@ dependencies:
   - pandera
   - pyranges==0.0.117
   - pybedtools == 0.9.0
-  - pip
   - setuptools<=70
+  - pip
   - pip:
       - "--editable=git+https://github.com/MicrobiologyETHZ/mbarq#egg=mbarq"
 

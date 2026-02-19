@@ -9,6 +9,8 @@ RUN micromamba install -y mamba -n base -c conda-forge && \
 
 # Clone mbarq
 WORKDIR /opt
+ENV MAMBA_ROOT_PREFIX=/opt/conda
+ENV PATH=${MAMBA_ROOT_PREFIX}/bin:${PATH}
 RUN git clone https://github.com/MicrobiologyETHZ/mbarq.git
 WORKDIR /opt/mbarq
 
@@ -16,10 +18,13 @@ WORKDIR /opt/mbarq
 SHELL ["/bin/bash", "-c"]
 
 # Create env and install mbarq
+# RUN micromamba env create -f mbarq_environment.yaml && \
+#     source activate mbarq && \
+#     pip install -e . && \
+#     conda clean -afy
 RUN micromamba env create -f mbarq_environment.yaml && \
-    source activate mbarq && \
-    pip install -e . && \
-    conda clean -afy
+    micromamba run -n mbarq pip install -e . && \
+    micromamba clean --all --yes
 
 # Make the mbarq env default on PATH
 ENV PATH=/opt/conda/envs/mbarq/bin:${PATH}

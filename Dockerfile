@@ -22,29 +22,29 @@ RUN conda config --remove channels defaults && \
     conda config --show channels
 
 # Install mamba from conda-forge (now without defaults)
-RUN conda install -y mamba -n base -c conda-forge && \
-    conda clean -afy
+# RUN conda install -y mamba -n base -c conda-forge && \
+#     conda clean -afy
 
-# Clone mbarq
-WORKDIR /opt
-RUN git clone https://github.com/MicrobiologyETHZ/mbarq.git
-WORKDIR /opt/mbarq
+# # Clone mbarq
+# WORKDIR /opt
+# RUN git clone https://github.com/MicrobiologyETHZ/mbarq.git
+# WORKDIR /opt/mbarq
 
-# Use bash so 'conda' works as expected in RUN steps
-SHELL ["/bin/bash", "-c"]
+# # Use bash so 'conda' works as expected in RUN steps
+# SHELL ["/bin/bash", "-c"]
 
-# Create env and install mbarq
-RUN mamba env create -f mbarq_environment.yaml && \
-    source activate mbarq && \
-    pip install -e . && \
-    conda clean -afy
+# # Create env and install mbarq
+# RUN mamba env create -f mbarq_environment.yaml && \
+#     source activate mbarq && \
+#     pip install -e . && \
+#     conda clean -afy
 
-# Make the mbarq env default on PATH
-ENV PATH=/opt/conda/envs/mbarq/bin:${PATH}
+# # Make the mbarq env default on PATH
+# ENV PATH=/opt/conda/envs/mbarq/bin:${PATH}
 
-# Sanity check: fail build if mbarq is not callable
-RUN mbarq --help >/dev/null
+# # Sanity check: fail build if mbarq is not callable
+# RUN mbarq --help >/dev/null
 
 
-ENTRYPOINT ["/bin/bash"]
-CMD []
+# ENTRYPOINT ["/bin/bash"]
+# CMD []
